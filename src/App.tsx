@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Compass, Heart, Trophy, Calendar, Settings, Home, MessageCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Compass, Heart, Trophy, Home, MessageCircle } from 'lucide-react';
 import { useAuth } from './hooks/useAuth';
 import { useCheckIns } from './hooks/useCheckIns';
 import AuthScreen from './components/AuthScreen';
@@ -30,7 +30,7 @@ export interface CheckInData {
 
 function App() {
   const [currentView, setCurrentView] = useState<'welcome' | 'dashboard' | 'relaxation' | 'checkin' | 'achievements' | 'chat'>('dashboard');
-  const { user, userProfile, loading, updateUserProfile, signOut } = useAuth();
+  const { user, userProfile, loading, updateUserProfile } = useAuth();
   const { checkInHistory, addCheckIn } = useCheckIns(user?.id);
 
   const handleCheckIn = async (data: Omit<CheckInData, 'date'>) => {
