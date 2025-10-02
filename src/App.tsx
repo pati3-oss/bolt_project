@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Compass, Heart, Trophy, Calendar, Settings, Home } from 'lucide-react';
+import { useAuth } from './hooks/useAuth';
+import { useCheckIns } from './hooks/useCheckIns';
+import AuthScreen from './components/AuthScreen';
 import Dashboard from './components/Dashboard';
 import RelaxationHub from './components/RelaxationHub';
 import CheckInSystem from './components/CheckInSystem';
 import Achievements from './components/Achievements';
-import WelcomeScreen from './components/WelcomeScreen';
 
 export interface User {
   name: string;
@@ -25,103 +27,73 @@ export interface CheckInData {
 }
 
 function App() {
-  const [currentView, setCurrentView] = useState<'welcome' | 'dashboard' | 'relaxation' | 'checkin' | 'achievements'>('welcome');
-  const [user, setUser] = useState<User | null>(null);
-  const [checkInHistory, setCheckInHistory] = useState<CheckInData[]>([]);
+  const [currentView, setCurrentView] = useState<'dashboard' | 'relaxation' | 'checkin' | 'achievements'>('dashboard');
+  const { user, userProfile, loading, updateUserProfile, signOut } = useAuth();
+  const { checkInHistory, addCheckIn } = useCheckIns(user?.id);
 
-  useEffect(() => {
-    // Simulate loading user data
-    const savedUser = localStorage.getItem('anchor-user');
-    const savedHistory = localStorage.getItem('anchor-checkin-history');
-    
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-      setCurrentView('dashboard');
-    }
-    
-    if (savedHistory) {
-      setCheckInHistory(JSON.parse(savedHistory));
-    }
-  }, []);
-
-  const saveUserData = (userData: User) => {
-    localStorage.setItem('anchor-user', JSON.stringify(userData));
-    setUser(userData);
-  };
-
-  const saveCheckInData = (checkInData: CheckInData[]) => {
-    localStorage.setItem('anchor-checkin-history', JSON.stringify(checkInData));
-    setCheckInHistory(checkInData);
-  };
-
-  const handleWelcomeComplete = (name: string) => {
-    const newUser: User = {
-      name,
-      streak: 0,
-      totalCheckIns: 0,
-      level: 1,
-      experience: 0,
-      badges: [],
-      lastCheckIn: null
-    };
-    saveUserData(newUser);
-    setCurrentView('dashboard');
-  };
-
-  const handleCheckIn = (data: Omit<CheckInData, 'date'>) => {
-    if (!user) return;
+  const handleCheckIn = async (data: Omit<CheckInData, 'date'>) => {
+    if (!user || !userProfile) return;
 
     const today = new Date().toISOString().split('T')[0];
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const yesterdayStr = yesterday.toISOString().split('T')[0];
 
-    const newCheckIn: CheckInData = {
-      ...data,
-      date: today
-    };
+    try {
+      await addCheckIn(data);
 
-    const updatedHistory = [...checkInHistory, newCheckIn];
-    saveCheckInData(updatedHistory);
+      // Update user stats
+      const updatedUser = { ...userProfile };
+      updatedUser.totalCheckIns += 1;
+      updatedUser.experience += 10;
 
-    // Update user stats
-    const updatedUser = { ...user };
-    updatedUser.totalCheckIns += 1;
-    updatedUser.experience += 10;
+      // Handle streaks
+      if (!userProfile.lastCheckIn || userProfile.lastCheckIn === yesterdayStr) {
+        updatedUser.streak += 1;
+      } else if (userProfile.lastCheckIn !== today) {
+        updatedUser.streak = 1;
+      }
 
-    // Handle streaks
-    if (!user.lastCheckIn || user.lastCheckIn === yesterdayStr) {
-      updatedUser.streak += 1;
-    } else if (user.lastCheckIn !== today) {
-      updatedUser.streak = 1;
+      updatedUser.lastCheckIn = today;
+
+      // Level up logic
+      const expForNextLevel = updatedUser.level * 100;
+      if (updatedUser.experience >= expForNextLevel) {
+        updatedUser.level += 1;
+        updatedUser.experience -= expForNextLevel;
+      }
+
+      // Award badges
+      if (updatedUser.streak === 3 && !updatedUser.badges.includes('first-streak')) {
+        updatedUser.badges.push('first-streak');
+      }
+      if (updatedUser.streak === 7 && !updatedUser.badges.includes('week-warrior')) {
+        updatedUser.badges.push('week-warrior');
+      }
+      if (updatedUser.totalCheckIns === 10 && !updatedUser.badges.includes('dedication')) {
+        updatedUser.badges.push('dedication');
+      }
+
+      await updateUserProfile(updatedUser);
+      setCurrentView('dashboard');
+    } catch (error) {
+      console.error('Error submitting check-in:', error);
     }
-
-    updatedUser.lastCheckIn = today;
-
-    // Level up logic
-    const expForNextLevel = updatedUser.level * 100;
-    if (updatedUser.experience >= expForNextLevel) {
-      updatedUser.level += 1;
-      updatedUser.experience -= expForNextLevel;
-    }
-
-    // Award badges
-    if (updatedUser.streak === 3 && !updatedUser.badges.includes('first-streak')) {
-      updatedUser.badges.push('first-streak');
-    }
-    if (updatedUser.streak === 7 && !updatedUser.badges.includes('week-warrior')) {
-      updatedUser.badges.push('week-warrior');
-    }
-    if (updatedUser.totalCheckIns === 10 && !updatedUser.badges.includes('dedication')) {
-      updatedUser.badges.push('dedication');
-    }
-
-    saveUserData(updatedUser);
-    setCurrentView('dashboard');
   };
 
-  if (currentView === 'welcome') {
-    return <WelcomeScreen onComplete={handleWelcomeComplete} />;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading anchor...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user || !userProfile) {
+    return <AuthScreen onAuthSuccess={() => {}} />;
   }
 
   return (
@@ -153,16 +125,16 @@ function App() {
 
       {/* Main Content */}
       <main className="pb-20">
-        {currentView === 'dashboard' && user && (
+        {currentView === 'dashboard' && (
           <Dashboard 
-            user={user} 
+            user={userProfile} 
             checkInHistory={checkInHistory} 
             onNavigate={setCurrentView}
           />
         )}
         {currentView === 'relaxation' && <RelaxationHub />}
         {currentView === 'checkin' && <CheckInSystem onSubmit={handleCheckIn} />}
-        {currentView === 'achievements' && user && <Achievements user={user} />}
+        {currentView === 'achievements' && <Achievements user={userProfile} />}
       </main>
     </div>
   );
