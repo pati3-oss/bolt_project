@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { User as SupabaseUser } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import { User } from '../App';
+import { setupDatabase } from '../utils/setupDatabase';
 
 export function useAuth() {
   const [user, setUser] = useState<SupabaseUser | null>(null);
@@ -43,7 +44,43 @@ export function useAuth() {
         .eq('id', userId)
         .single();
 
-      if (error) throw error;
+      if (error) {
+        // If table doesn't exist, try to set it up
+        if (error.message.includes('Could not find the table')) {
+          console.log('User profiles table not found, attempting to create...');
+          const setupSuccess = await setupDatabase();
+          if (setupSuccess) {
+            // Retry the query after setup
+            const { data: retryData, error: retryError } = await supabase
+              .from('user_profiles')
+              .select('*')
+              .eq('id', userId)
+              .single();
+            
+            if (retryError && !retryError.message.includes('No rows')) {
+              throw retryError;
+            }
+            
+            if (retryData) {
+              setUserProfile({
+                name: retryData.name,
+                streak: retryData.streak,
+                totalCheckIns: retryData.total_check_ins,
+                level: retryData.level,
+                experience: retryData.experience,
+                badges: retryData.badges,
+                lastCheckIn: retryData.last_check_in,
+              });
+            }
+            return;
+          }
+        }
+        
+        // If it's not a "no rows" error, throw it
+        if (!error.message.includes('No rows')) {
+          throw error;
+        }
+      }
 
       if (data) {
         setUserProfile({
