@@ -42,12 +42,7 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
       }
       onAuthSuccess();
     } catch (error: any) {
-      // Handle specific Supabase rate limit error
-      if (error.message && error.message.includes('over_email_send_rate_limit')) {
-        setError('Too many requests. Please wait a minute before trying again for security purposes.');
-      } else {
-        setError(error.message);
-      }
+      setError(error.message);
     } finally {
       setLoading(false);
     }
