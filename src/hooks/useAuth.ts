@@ -42,7 +42,7 @@ export function useAuth() {
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
 
       if (error) {
         // If table doesn't exist, try to set it up
@@ -55,12 +55,12 @@ export function useAuth() {
               .from('user_profiles')
               .select('*')
               .eq('id', userId)
-              .single();
-            
-            if (retryError && !retryError.message.includes('No rows')) {
+              .maybeSingle();
+
+            if (retryError) {
               throw retryError;
             }
-            
+
             if (retryData) {
               setUserProfile({
                 name: retryData.name,
@@ -75,11 +75,8 @@ export function useAuth() {
             return;
           }
         }
-        
-        // If it's not a "no rows" error, throw it
-        if (!error.message.includes('No rows')) {
-          throw error;
-        }
+
+        throw error;
       }
 
       if (data) {
