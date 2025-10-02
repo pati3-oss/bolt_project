@@ -1,12 +1,12 @@
 import React from 'react';
-import { Calendar, Flame, Star, TrendingUp, Heart, Compass } from 'lucide-react';
+import { Calendar, Flame, Star, TrendingUp, Heart, Compass, MessageCircle } from 'lucide-react';
 import { User, CheckInData } from '../App';
 import AnchorLogo from './AnchorLogo';
 
 interface DashboardProps {
   user: User;
   checkInHistory: CheckInData[];
-  onNavigate: (view: 'relaxation' | 'checkin') => void;
+  onNavigate: (view: 'relaxation' | 'checkin' | 'chat') => void;
 }
 
 export default function Dashboard({ user, checkInHistory, onNavigate }: DashboardProps) {
@@ -180,6 +180,25 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
                 <h3 className="font-semibold text-gray-900">Relaxation Hub</h3>
                 <p className="text-sm text-gray-600">
                   Explore immersive environments for stress relief
+                </p>
+              </div>
+            </div>
+          </button>
+
+          <button
+            onClick={() => onNavigate('chat')}
+            className="w-full p-4 rounded-2xl bg-white/80 backdrop-blur-lg border border-white/20 hover:scale-[1.02] shadow-lg hover:shadow-xl transition-all relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-16 h-16 bg-green-200/30 rounded-full -mr-8 -mt-8" />
+            <div className="flex items-center space-x-4 relative z-10">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center relative">
+                <MessageCircle className="text-green-600" size={24} />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse" />
+              </div>
+              <div className="text-left">
+                <h3 className="font-semibold text-gray-900">Peer Support</h3>
+                <p className="text-sm text-gray-600">
+                  Connect with others in anonymous support groups
                 </p>
               </div>
             </div>

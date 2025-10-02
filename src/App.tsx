@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Compass, Heart, Trophy, Calendar, Settings, Home } from 'lucide-react';
+import { Compass, Heart, Trophy, Calendar, Settings, Home, MessageCircle } from 'lucide-react';
 import { useAuth } from './hooks/useAuth';
 import { useCheckIns } from './hooks/useCheckIns';
 import AuthScreen from './components/AuthScreen';
@@ -7,6 +7,8 @@ import Dashboard from './components/Dashboard';
 import RelaxationHub from './components/RelaxationHub';
 import CheckInSystem from './components/CheckInSystem';
 import Achievements from './components/Achievements';
+import WelcomeScreen from './components/WelcomeScreen';
+import GroupChat from './components/GroupChat';
 
 export interface User {
   name: string;
@@ -27,7 +29,7 @@ export interface CheckInData {
 }
 
 function App() {
-  const [currentView, setCurrentView] = useState<'dashboard' | 'relaxation' | 'checkin' | 'achievements'>('dashboard');
+  const [currentView, setCurrentView] = useState<'welcome' | 'dashboard' | 'relaxation' | 'checkin' | 'achievements' | 'chat'>('dashboard');
   const { user, userProfile, loading, updateUserProfile, signOut } = useAuth();
   const { checkInHistory, addCheckIn } = useCheckIns(user?.id);
 
@@ -96,6 +98,18 @@ function App() {
     return <AuthScreen onAuthSuccess={() => {}} />;
   }
 
+  // If user is signed in but hasn't completed the welcome flow (no name), show WelcomeScreen
+  if (userProfile && !userProfile.name) {
+    return (
+      <WelcomeScreen
+        onComplete={async (name: string) => {
+          await updateUserProfile({ name });
+          setCurrentView('dashboard');
+        }}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Navigation */}
@@ -105,6 +119,7 @@ function App() {
             { id: 'dashboard', icon: Home, label: 'Home' },
             { id: 'relaxation', icon: Compass, label: 'Relax' },
             { id: 'checkin', icon: Heart, label: 'Check-in' },
+            { id: 'chat', icon: MessageCircle, label: 'Support' },
             { id: 'achievements', icon: Trophy, label: 'Rewards' },
           ].map(({ id, icon: Icon, label }) => (
             <button
@@ -133,8 +148,9 @@ function App() {
           />
         )}
         {currentView === 'relaxation' && <RelaxationHub />}
-        {currentView === 'checkin' && <CheckInSystem onSubmit={handleCheckIn} />}
-        {currentView === 'achievements' && <Achievements user={userProfile} />}
+  {currentView === 'checkin' && <CheckInSystem onSubmit={handleCheckIn} />}
+  {currentView === 'chat' && <GroupChat />}
+  {currentView === 'achievements' && userProfile && <Achievements user={userProfile} />}
       </main>
     </div>
   );
