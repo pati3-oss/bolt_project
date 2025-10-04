@@ -83,7 +83,21 @@ function App() {
     }
   };
 
-  if (loading) {
+  if (!user) {
+    if (loading) {
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading anchor...</p>
+          </div>
+        </div>
+      );
+    }
+    return <AuthScreen onAuthSuccess={() => {}} />;
+  }
+
+  if (loading || !userProfile) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
         <div className="text-center">
@@ -92,10 +106,6 @@ function App() {
         </div>
       </div>
     );
-  }
-
-  if (!user || !userProfile) {
-    return <AuthScreen onAuthSuccess={() => {}} />;
   }
 
   // If user is signed in but hasn't completed the welcome flow (no name), show WelcomeScreen
