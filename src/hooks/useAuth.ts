@@ -41,7 +41,7 @@ export function useAuth() {
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
 
@@ -55,6 +55,36 @@ export function useAuth() {
           badges: data.badges,
           lastCheckIn: data.last_check_in,
         });
+      } else {
+        // Create new user profile if it doesn't exist
+        const { data: newProfile, error: createError } = await supabase
+          .from('user_profiles')
+          .insert({
+            id: userId,
+            name: '',
+            streak: 0,
+            total_check_ins: 0,
+            level: 1,
+            experience: 0,
+            badges: [],
+            last_check_in: null,
+          })
+          .select()
+          .single();
+
+        if (createError) throw createError;
+
+        if (newProfile) {
+          setUserProfile({
+            name: newProfile.name,
+            streak: newProfile.streak,
+            totalCheckIns: newProfile.total_check_ins,
+            level: newProfile.level,
+            experience: newProfile.experience,
+            badges: newProfile.badges,
+            lastCheckIn: newProfile.last_check_in,
+          });
+        }
       }
     } catch (error) {
       console.error('Error fetching user profile:', error);
