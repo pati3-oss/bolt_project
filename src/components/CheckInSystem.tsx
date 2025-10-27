@@ -96,7 +96,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
             <div
               key={index}
               className={`h-2 flex-1 rounded-full transition-colors ${
-                index <= step ? 'bg-blue-500' : 'bg-gray-200'
+                index <= step ? 'bg-gradient-to-r from-orange-500 to-pink-500' : 'bg-gray-200'
               }`}
             />
           ))}
@@ -115,7 +115,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-center space-x-2">
             <span>{currentStep.title}</span>
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+            <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
           </h1>
           <p className="text-gray-600">
             {currentStep.subtitle}
@@ -138,7 +138,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
               <div className="text-center">
                 <p className="text-sm text-gray-500 mb-4 flex items-center justify-center space-x-2">
                   <span>This helps us understand your patterns better</span>
-                  <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
+                  <div className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse" />
                 </p>
               </div>
             </div>
@@ -152,7 +152,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
                     onClick={() => currentStep.setValue!(i)}
                     className={`w-12 h-12 rounded-full border-2 transition-all flex items-center justify-center relative ${
                       currentStep.value === i
-                        ? 'border-blue-500 bg-blue-500 text-white scale-110'
+                        ? 'border-orange-500 bg-gradient-to-r from-orange-500 to-pink-500 text-white scale-110'
                         : 'border-gray-300 hover:border-gray-400'
                     }`}
                   >
@@ -177,7 +177,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
                   ) : (
                     <span>{currentStep.labels![currentStep.value!]}</span>
                   )}
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                  <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
                 </p>
               </div>
 
@@ -211,7 +211,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
                 handleSubmit();
               }
             }}
-            className="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-xl font-medium hover:from-orange-600 hover:to-pink-600 transition-colors shadow-lg hover:shadow-xl"
           >
             {step === steps.length - 1 ? (
               <>
@@ -229,11 +229,11 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
 
         {/* Encouragement */}
         <div className="mt-8 text-center relative">
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-4 border border-white/20 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-12 h-12 bg-blue-200/30 rounded-full -mr-6 -mt-6" />
+          <div className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-2xl p-4 border border-white/20 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-12 h-12 bg-orange-200/30 rounded-full -mr-6 -mt-6" />
             <p className="text-sm text-gray-700 font-medium relative z-10 flex items-center justify-center space-x-2">
               <span>You're doing great! Every check-in helps build better habits 💪</span>
-              <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
+              <div className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse" />
             </p>
           </div>
         </div>

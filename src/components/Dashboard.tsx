@@ -37,16 +37,16 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
   return (
     <div className="min-h-screen p-4 pt-8 relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute top-20 left-4 w-16 h-16 bg-blue-200/20 rounded-full animate-pulse" />
-      <div className="absolute top-32 right-8 w-12 h-12 bg-purple-200/20 rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-20 left-4 w-16 h-16 bg-orange-200/20 rounded-full animate-pulse" />
+      <div className="absolute top-32 right-8 w-12 h-12 bg-pink-200/20 rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
       <div className="absolute bottom-40 left-8 w-20 h-20 bg-pink-200/20 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-20 right-4 w-14 h-14 bg-indigo-200/20 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }} />
+      <div className="absolute bottom-20 right-4 w-14 h-14 bg-orange-200/20 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }} />
       
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/4 left-1/6 w-24 h-24 border border-blue-300 rounded-full" />
-        <div className="absolute top-2/3 right-1/6 w-20 h-20 border border-purple-300 rounded-full" />
-        <div className="absolute top-1/2 left-1/3 w-16 h-16 border border-pink-300 rounded-full" />
+        <div className="absolute top-1/4 left-1/6 w-24 h-24 border border-orange-300 rounded-full" />
+        <div className="absolute top-2/3 right-1/6 w-20 h-20 border border-pink-300 rounded-full" />
+        <div className="absolute top-1/2 left-1/3 w-16 h-16 border border-amber-300 rounded-full" />
       </div>
 
       <div className="max-w-md mx-auto space-y-6 relative z-10">
@@ -54,15 +54,15 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
         <div className="text-center space-y-3 relative">
           <div className="flex items-center justify-center space-x-3 relative">
             <div className="relative">
-              <AnchorLogo size={32} className="text-blue-600 relative z-10" />
+              <AnchorLogo size={32} className="text-orange-500 relative z-10" />
               {/* Floating sparkles around logo */}
-              <div className="absolute -top-1 -left-1 w-2 h-2 bg-blue-400 rounded-full animate-ping" />
-              <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-purple-400 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
-              <div className="absolute -bottom-1 -left-1 w-1 h-1 bg-pink-400 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
+              <div className="absolute -top-1 -left-1 w-2 h-2 bg-orange-400 rounded-full animate-ping" />
+              <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-pink-400 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
+              <div className="absolute -bottom-1 -left-1 w-1 h-1 bg-orange-300 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
             </div>
             <div>
               <h2 className="text-lg font-bold text-gray-900">anchor</h2>
-              <p className="text-xs text-blue-600 font-medium">Small steps, Stronger you</p>
+              <p className="text-xs text-orange-600 font-medium">Small steps, Stronger you</p>
             </div>
           </div>
           <h1 className="text-2xl font-bold text-gray-900">
@@ -88,11 +88,11 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
           </div>
 
           <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-4 border border-white/20 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-12 h-12 bg-blue-200/30 rounded-full -mr-6 -mt-6" />
+            <div className="absolute top-0 right-0 w-12 h-12 bg-pink-200/30 rounded-full -mr-6 -mt-6" />
             <div className="flex items-center space-x-3 relative z-10">
-              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center relative">
-                <Star className="text-blue-600" size={20} />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-400 rounded-full animate-ping" />
+              <div className="w-10 h-10 bg-gradient-to-r from-orange-100 to-pink-100 rounded-full flex items-center justify-center relative">
+                <Star className="text-orange-500" size={20} />
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-pink-400 rounded-full animate-ping" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">Lv.{user.level}</p>
@@ -104,7 +104,7 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
 
         {/* Level Progress */}
         <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-4 border border-white/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full -mr-8 -mt-8" />
+          <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-orange-200/30 to-pink-200/30 rounded-full -mr-8 -mt-8" />
           <div className="flex items-center justify-between mb-2 relative z-10">
             <span className="text-sm font-medium text-gray-700">
               Level {user.level} Progress
@@ -115,7 +115,7 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2 relative">
             <div 
-              className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-500 relative"
+              className="bg-gradient-to-r from-orange-500 to-pink-500 h-2 rounded-full transition-all duration-500 relative"
               style={{ width: `${expProgress}%` }}
             >
               {/* Animated shine effect */}
@@ -128,7 +128,7 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
         <div className="space-y-3">
           <h2 className="text-lg font-semibold text-gray-900 flex items-center space-x-2">
             <span>Quick Actions</span>
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+            <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
           </h2>
           
           <button
@@ -170,11 +170,11 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
             onClick={() => onNavigate('relaxation')}
             className="w-full p-4 rounded-2xl bg-white/80 backdrop-blur-lg border border-white/20 hover:scale-[1.02] shadow-lg hover:shadow-xl transition-all relative overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-16 h-16 bg-blue-200/30 rounded-full -mr-8 -mt-8" />
+            <div className="absolute top-0 right-0 w-16 h-16 bg-orange-200/30 rounded-full -mr-8 -mt-8" />
             <div className="flex items-center space-x-4 relative z-10">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center relative">
-                <Compass className="text-blue-600" size={24} />
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-400 rounded-full animate-pulse" />
+              <div className="w-12 h-12 bg-gradient-to-r from-orange-100 to-pink-100 rounded-full flex items-center justify-center relative">
+                <Compass className="text-orange-500" size={24} />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-orange-400 rounded-full animate-pulse" />
               </div>
               <div className="text-left">
                 <h3 className="font-semibold text-gray-900">Relaxation Hub</h3>
@@ -189,11 +189,11 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
             onClick={() => onNavigate('chat')}
             className="w-full p-4 rounded-2xl bg-white/80 backdrop-blur-lg border border-white/20 hover:scale-[1.02] shadow-lg hover:shadow-xl transition-all relative overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-16 h-16 bg-green-200/30 rounded-full -mr-8 -mt-8" />
+            <div className="absolute top-0 right-0 w-16 h-16 bg-pink-200/30 rounded-full -mr-8 -mt-8" />
             <div className="flex items-center space-x-4 relative z-10">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center relative">
-                <MessageCircle className="text-green-600" size={24} />
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse" />
+              <div className="w-12 h-12 bg-gradient-to-r from-orange-100 to-pink-100 rounded-full flex items-center justify-center relative">
+                <MessageCircle className="text-pink-500" size={24} />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-pink-400 rounded-full animate-pulse" />
               </div>
               <div className="text-left">
                 <h3 className="font-semibold text-gray-900">Peer Support</h3>
@@ -208,11 +208,11 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
         {/* Recent Mood Trend */}
         {checkInHistory.length > 0 && (
           <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-4 border border-white/20 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full -mr-10 -mt-10" />
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-200/30 to-pink-200/30 rounded-full -mr-10 -mt-10" />
             <div className="flex items-center justify-between mb-3 relative z-10">
               <h3 className="font-semibold text-gray-900 flex items-center space-x-2">
                 <span>This Week's Mood</span>
-                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
               </h3>
               <div className="flex items-center space-x-1">
                 <TrendingUp className="text-green-500" size={16} />
@@ -229,7 +229,7 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
                   <div key={i} className="flex-1 bg-gray-200 rounded h-8 relative overflow-hidden">
                     {dayMood && (
                       <div 
-                        className="bg-gradient-to-t from-blue-400 to-blue-500 rounded absolute bottom-0 left-0 right-0 transition-all relative"
+                        className="bg-gradient-to-t from-orange-400 to-pink-500 rounded absolute bottom-0 left-0 right-0 transition-all relative"
                         style={{ height: `${(dayMood / 5) * 100}%` }}
                       >
                         {/* Shine effect on mood bars */}

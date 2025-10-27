@@ -17,21 +17,21 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
       content: (
         <div className="text-center space-y-6">
           <div className="relative">
-            <div className="w-32 h-32 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl relative overflow-hidden">
+            <div className="w-32 h-32 mx-auto bg-gradient-to-br from-orange-500 to-pink-600 rounded-3xl flex items-center justify-center shadow-2xl relative overflow-hidden">
               <AnchorLogo size={64} className="text-white relative z-10" />
               {/* Animated background elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 opacity-50 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-pink-500 opacity-50 animate-pulse" />
               <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-300 rounded-full animate-bounce" />
               <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-pink-300 rounded-full animate-pulse" />
             </div>
             {/* Floating sparkles around logo */}
             <div className="absolute -top-2 -left-2 w-3 h-3 bg-yellow-400 rounded-full animate-ping" />
-            <div className="absolute -top-1 -right-3 w-2 h-2 bg-blue-400 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
-            <div className="absolute -bottom-2 -right-1 w-2.5 h-2.5 bg-purple-400 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
+            <div className="absolute -top-1 -right-3 w-2 h-2 bg-orange-400 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
+            <div className="absolute -bottom-2 -right-1 w-2.5 h-2.5 bg-pink-400 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
           </div>
           <div className="space-y-2">
             <h2 className="text-4xl font-bold text-gray-900 tracking-wide">anchor</h2>
-            <p className="text-xl text-blue-600 font-medium">Small steps, Stronger you</p>
+            <p className="text-xl text-orange-600 font-medium">Small steps, Stronger you</p>
           </div>
           <p className="text-gray-600 text-lg leading-relaxed">
             Find your calm in the storm of student life. Every small step builds resilience. Anchor combines immersive AR/VR relaxation 
@@ -133,16 +133,16 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
         <div className="space-y-6">
           <div className="text-center">
             <div className="relative">
-              <div className="w-20 h-20 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg relative overflow-hidden">
+              <div className="w-20 h-20 mx-auto bg-gradient-to-br from-orange-500 to-pink-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg relative overflow-hidden">
                 <AnchorLogo size={40} className="text-white relative z-10" />
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 opacity-50 animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-pink-500 opacity-50 animate-pulse" />
               </div>
               {/* Floating elements around logo */}
-              <div className="absolute -top-1 -left-1 w-3 h-3 bg-blue-400 rounded-full animate-ping" />
-              <div className="absolute -top-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
+              <div className="absolute -top-1 -left-1 w-3 h-3 bg-orange-400 rounded-full animate-ping" />
+              <div className="absolute -top-1 -right-1 w-2 h-2 bg-pink-400 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
               <div className="absolute -bottom-1 -left-2 w-2.5 h-2.5 bg-pink-400 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
             </div>
-            <p className="text-blue-600 font-medium mb-4">Small steps, Stronger you</p>
+            <p className="text-orange-600 font-medium mb-4">Small steps, Stronger you</p>
           </div>
           <div className="relative">
             <input
@@ -150,12 +150,12 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
               placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-lg transition-all duration-200"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-lg transition-all duration-200"
               autoFocus
             />
             {/* Decorative elements around input */}
-            <div className="absolute -top-2 -left-2 w-4 h-4 bg-blue-200/50 rounded-full animate-pulse" />
-            <div className="absolute -bottom-2 -right-2 w-3 h-3 bg-purple-200/50 rounded-full animate-pulse" style={{ animationDelay: '0.7s' }} />
+            <div className="absolute -top-2 -left-2 w-4 h-4 bg-orange-200/50 rounded-full animate-pulse" />
+            <div className="absolute -bottom-2 -right-2 w-3 h-3 bg-pink-200/50 rounded-full animate-pulse" style={{ animationDelay: '0.7s' }} />
           </div>
         </div>
       )
@@ -174,18 +174,18 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
   const canProceed = !isLastStep || name.trim().length > 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-pink-50 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Floating decorative elements */}
-      <div className="absolute top-10 left-10 w-20 h-20 bg-blue-200/30 rounded-full animate-pulse" />
-      <div className="absolute top-20 right-16 w-16 h-16 bg-purple-200/30 rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
-      <div className="absolute bottom-20 left-16 w-12 h-12 bg-indigo-200/30 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-10 left-10 w-20 h-20 bg-orange-200/30 rounded-full animate-pulse" />
+      <div className="absolute top-20 right-16 w-16 h-16 bg-pink-200/30 rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-20 left-16 w-12 h-12 bg-amber-200/30 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
       <div className="absolute bottom-32 right-10 w-24 h-24 bg-pink-200/30 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }} />
       
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-blue-300 rounded-full" />
-        <div className="absolute top-3/4 right-1/4 w-24 h-24 border border-purple-300 rounded-full" />
-        <div className="absolute top-1/2 left-1/6 w-16 h-16 border border-indigo-300 rounded-full" />
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-orange-300 rounded-full" />
+        <div className="absolute top-3/4 right-1/4 w-24 h-24 border border-pink-300 rounded-full" />
+        <div className="absolute top-1/2 left-1/6 w-16 h-16 border border-amber-300 rounded-full" />
       </div>
 
       <div className="w-full max-w-md relative z-10">
@@ -196,7 +196,7 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
               <div
                 key={index}
                 className={`h-2 flex-1 rounded-full transition-colors ${
-                  index <= step ? 'bg-blue-500' : 'bg-gray-200'
+                  index <= step ? 'bg-gradient-to-r from-orange-500 to-pink-500' : 'bg-gray-200'
                 }`}
               />
             ))}
@@ -233,7 +233,7 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
               disabled={!canProceed}
               className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all ${
                 canProceed
-                  ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl'
+                  ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:from-orange-600 hover:to-pink-600 shadow-lg hover:shadow-xl'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
