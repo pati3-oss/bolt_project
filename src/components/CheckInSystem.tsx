@@ -96,7 +96,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
             <div
               key={index}
               className={`h-2 flex-1 rounded-full transition-colors ${
-                index <= step ? 'bg-gradient-to-r from-orange-500 to-pink-500' : 'bg-gray-200'
+                index <= step ? 'bg-gradient-to-r from-orange-600 to-rose-500' : 'bg-gray-200'
               }`}
             />
           ))}
@@ -152,7 +152,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
                     onClick={() => currentStep.setValue!(i)}
                     className={`w-12 h-12 rounded-full border-2 transition-all flex items-center justify-center relative ${
                       currentStep.value === i
-                        ? 'border-orange-500 bg-gradient-to-r from-orange-500 to-pink-500 text-white scale-110'
+                        ? 'border-orange-600 bg-gradient-to-r from-orange-600 to-rose-500 text-white scale-110'
                         : 'border-gray-300 hover:border-gray-400'
                     }`}
                   >
@@ -211,7 +211,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
                 handleSubmit();
               }
             }}
-            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-xl font-medium hover:from-orange-600 hover:to-pink-600 transition-colors shadow-lg hover:shadow-xl"
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-rose-500 text-white rounded-xl font-medium hover:from-orange-700 hover:to-rose-600 transition-colors shadow-lg hover:shadow-xl"
           >
             {step === steps.length - 1 ? (
               <>
@@ -229,7 +229,7 @@ export default function CheckInSystem({ onSubmit }: CheckInSystemProps) {
 
         {/* Encouragement */}
         <div className="mt-8 text-center relative">
-          <div className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-2xl p-4 border border-white/20 relative overflow-hidden">
+          <div className="bg-gradient-to-r from-orange-100 to-rose-50 rounded-2xl p-4 border border-white/20 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-12 h-12 bg-orange-200/30 rounded-full -mr-6 -mt-6" />
             <p className="text-sm text-gray-700 font-medium relative z-10 flex items-center justify-center space-x-2">
               <span>You're doing great! Every check-in helps build better habits 💪</span>

@@ -49,7 +49,7 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-pink-50 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-orange-100 via-orange-50 to-rose-50 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Floating decorative elements */}
       <div className="absolute top-10 left-10 w-20 h-20 bg-orange-200/30 rounded-full animate-pulse" />
       <div className="absolute top-20 right-16 w-16 h-16 bg-pink-200/30 rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
@@ -68,9 +68,9 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="relative">
-              <div className="w-20 h-20 mx-auto bg-gradient-to-br from-orange-500 to-pink-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg relative overflow-hidden">
+              <div className="w-20 h-20 mx-auto bg-gradient-to-br from-orange-600 to-rose-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg relative overflow-hidden">
                 <AnchorLogo size={40} className="text-white relative z-10" />
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-pink-500 opacity-50 animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-rose-500 opacity-50 animate-pulse" />
               </div>
               {/* Floating elements around logo */}
               <div className="absolute -top-1 -left-1 w-3 h-3 bg-orange-400 rounded-full animate-ping" />
@@ -78,7 +78,7 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
               <div className="absolute -bottom-1 -left-2 w-2.5 h-2.5 bg-pink-400 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">anchor</h1>
-            <p className="text-orange-600 font-medium mb-4">Small steps, Stronger you</p>
+            <p className="text-orange-700 font-medium mb-4">Small steps, Stronger you</p>
             <p className="text-gray-600">
               {isLogin ? 'Welcome back! Sign in to continue your wellness journey.' : 'Join anchor and start building healthier habits today.'}
             </p>
@@ -151,7 +151,7 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-xl font-medium hover:from-orange-600 hover:to-pink-600 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-rose-500 text-white rounded-xl font-medium hover:from-orange-700 hover:to-rose-600 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

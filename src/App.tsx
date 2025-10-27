@@ -86,7 +86,7 @@ function App() {
   if (!user) {
     if (loading) {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-pink-50 flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-orange-100 via-orange-50 to-rose-50 flex items-center justify-center">
           <div className="text-center">
             <div className="w-16 h-16 border-4 border-orange-200 border-t-orange-600 rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-gray-600">Loading anchor...</p>
@@ -99,7 +99,7 @@ function App() {
 
   if (loading || !userProfile) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-pink-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-orange-100 via-orange-50 to-rose-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-orange-200 border-t-orange-600 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading anchor...</p>
@@ -121,7 +121,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-100 via-orange-50 to-rose-50">
       {/* Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-lg border-t border-white/20 z-50">
         <div className="flex justify-around items-center py-2 max-w-md mx-auto">
@@ -137,7 +137,7 @@ function App() {
               onClick={() => setCurrentView(id as any)}
               className={`flex flex-col items-center space-y-1 p-2 rounded-lg transition-all ${
                 currentView === id
-                  ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white'
+                  ? 'bg-gradient-to-r from-orange-600 to-rose-500 text-white'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
