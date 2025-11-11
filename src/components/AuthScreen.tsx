@@ -28,8 +28,9 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
           password,
         });
         if (error) throw error;
+        onAuthSuccess();
       } else {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -39,8 +40,16 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
           },
         });
         if (error) throw error;
+
+        // Check if email confirmation is required
+        if (data?.user && !data.session) {
+          setError('Please check your email to confirm your account before signing in.');
+          setIsLogin(true);
+        } else if (data?.session) {
+          // Auto-login if no confirmation required
+          onAuthSuccess();
+        }
       }
-      onAuthSuccess();
     } catch (error: any) {
       setError(error.message);
     } finally {
