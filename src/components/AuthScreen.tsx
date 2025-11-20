@@ -50,8 +50,9 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
           onAuthSuccess();
         }
       }
-    } catch (error: any) {
-      setError(error.message);
+    } catch (err: unknown) {
+      const error = err as Error | { message?: string } | null;
+      setError(error?.message ?? 'An unexpected error occurred');
     } finally {
       setLoading(false);
     }

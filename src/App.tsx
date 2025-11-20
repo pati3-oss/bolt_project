@@ -129,12 +129,12 @@ function App() {
             { id: 'dashboard', icon: Home, label: 'Home' },
             { id: 'relaxation', icon: Compass, label: 'Relax' },
             { id: 'checkin', icon: Heart, label: 'Check-in' },
-            { id: 'chat', icon: MessageCircle, label: 'Support' },
+            { id: 'chat', icon: MessageCircle, label: 'Peer Chat' },
             { id: 'achievements', icon: Trophy, label: 'Rewards' },
           ].map(({ id, icon: Icon, label }) => (
             <button
               key={id}
-              onClick={() => setCurrentView(id as any)}
+              onClick={() => setCurrentView(id as 'welcome' | 'dashboard' | 'relaxation' | 'checkin' | 'achievements' | 'chat')}
               className={`flex flex-col items-center space-y-1 p-2 rounded-lg transition-all ${
                 currentView === id
                   ? 'bg-gradient-to-r from-orange-600 to-rose-500 text-white'

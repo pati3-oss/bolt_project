@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Heart, Sparkles, ChevronRight, Flame, Trophy, Headphones } from 'lucide-react';
+import { useState } from 'react';
+import { Sparkles, ChevronRight, Flame, Trophy, Headphones } from 'lucide-react';
 import AnchorLogo from './AnchorLogo';
 
 interface WelcomeScreenProps {

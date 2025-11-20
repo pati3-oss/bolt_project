@@ -13,6 +13,8 @@ export interface ChatGroup {
   id: string;
   name: string;
   description: string;
+  // lucide-react icon components have heterogeneous prop typings; allow `any` here.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: React.ComponentType<any>;
   color: string;
   memberCount: number;
@@ -92,17 +94,7 @@ export default function GroupChat() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (selectedGroup) {
-      loadMessages(selectedGroup.id);
-    }
-  }, [selectedGroup]);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const loadMessages = (groupId: string) => {
+  const loadMessages = React.useCallback((groupId: string) => {
     const savedMessages = localStorage.getItem(`anchor-chat-${groupId}`);
     if (savedMessages) {
       setMessages(JSON.parse(savedMessages));
@@ -127,7 +119,19 @@ export default function GroupChat() {
       setMessages(welcomeMessages);
       saveMessages(groupId, welcomeMessages);
     }
-  };
+  }, []);
+
+  React.useEffect(() => {
+    if (selectedGroup) {
+      loadMessages(selectedGroup.id);
+    }
+  }, [selectedGroup, loadMessages]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  
 
   const saveMessages = (groupId: string, messages: ChatMessage[]) => {
     localStorage.setItem(`anchor-chat-${groupId}`, JSON.stringify(messages));
@@ -303,7 +307,10 @@ export default function GroupChat() {
           </button>
           
           <div className={`w-10 h-10 rounded-full flex items-center justify-center ${getColorClasses(selectedGroup.color)}`}>
-            <selectedGroup.icon size={20} />
+            {(() => {
+              const IconComp = selectedGroup.icon;
+              return <IconComp size={20} />;
+            })()}
           </div>
           
           <div className="flex-1">

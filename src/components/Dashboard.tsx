@@ -1,5 +1,4 @@
-import React from 'react';
-import { Calendar, Flame, Star, TrendingUp, Heart, Compass, MessageCircle } from 'lucide-react';
+import { Flame, Star, TrendingUp, Heart, Compass, MessageCircle } from 'lucide-react';
 import { User, CheckInData } from '../App';
 import AnchorLogo from './AnchorLogo';
 
@@ -257,7 +256,7 @@ export default function Dashboard({ user, checkInHistory, onNavigate }: Dashboar
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
             </h3>
             <div className="flex space-x-2 relative z-10">
-              {user.badges.slice(-3).map((badge, index) => (
+              {user.badges.slice(-3).map((_, index) => (
                 <div key={index} className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center relative">
                   <Star className="text-yellow-600" size={20} />
                   <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-ping" />

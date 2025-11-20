@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import { CheckInData } from '../App';
 
@@ -6,13 +6,8 @@ export function useCheckIns(userId: string | undefined) {
   const [checkInHistory, setCheckInHistory] = useState<CheckInData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (userId) {
-      fetchCheckIns();
-    }
-  }, [userId]);
-
-  const fetchCheckIns = async () => {
+  const fetchCheckIns = useCallback(async () => {
+    if (!userId) return;
     if (!userId) return;
 
     try {
@@ -38,7 +33,13 @@ export function useCheckIns(userId: string | undefined) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId) {
+      fetchCheckIns();
+    }
+  }, [userId, fetchCheckIns]);
 
   const addCheckIn = async (checkInData: Omit<CheckInData, 'date'>) => {
     if (!userId) return;
